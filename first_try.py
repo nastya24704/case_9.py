@@ -31,15 +31,15 @@ def main():
     side_length = size / N #длина стороны зависит от количества
     height = math.sqrt(3) * side_length
 
-    start_x_0 = -size +height #начальное положение
+    start_x_0 = -size + height #начальное положение
     start_y_0 = size - side_length
 
     for row in range(N): #смещение по координате y
-        y_offset = start_y_0 - row * height
+        y_offset = start_y_0 - row * side_length* 1.5
         if row % 2 == 0: #проверяет четная ли строка по счету
             x_offset = start_x_0 #если да, то она принимает начальное положение
         else:
-            x_offset = start_x_0 + (side_length / 2) # иначе сдвигается вниз
+            x_offset = start_x_0 + (side_length * math.sqrt(3)) / 2 # иначе сдвигается вниз
 
         for col in range(N):
             x = x_offset + col * side_length * math.sqrt(3)
