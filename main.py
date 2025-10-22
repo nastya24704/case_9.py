@@ -4,6 +4,7 @@ import time
 import webcolors
 import local as lcl
 
+
 available_colors_1 = [
     ('\U0001F48B' f'{lcl.RED}', 'red'),
     ('\U0001F499' f'{lcl.BLUE}', 'blue'),
@@ -479,7 +480,8 @@ def chose_type_check() -> str:
         print(f'{lcl.INPUT_ERROR}')
 
 
-def pattern_colors(N: int, color_first: str, color_second: str, pattern: str, pattern_type: str) -> list:
+def pattern_colors(N: int, color_first: str, color_second: str, 
+                   pattern: str, pattern_type: str) -> list:
     """
     Determines the color pattern based on user's choice.
 
