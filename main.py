@@ -47,7 +47,7 @@ def get_valid_color_from_user(prompt: str) -> str:
                 print(f'{lcl.ERROR_UNKNOWN_COLOR}')
 
 
-def get_color_choice() -> tuple:
+def get_color_choice():
     """
     Allows user to select two colors from predefined options or custom HEX/English names.
 
@@ -388,12 +388,26 @@ def chess_pattern(N: int, color_first: str, color_second: str) -> list:
     """
 
     colors = []
-
-    for row in range(N):
-        color = color_first if row % 2 == 0 else color_second
-        for col in range(N):
+    if N % 2 == 0:
+        for i in range(N // 2):
+            for col in range(N):
+                colors.append(color_first)
+                colors.append(color_second)
+            for col in range(N):
+                colors.append(color_second)
+                colors.append(color_first)
+    else:
+        for i in range((N - 1) // 2):
+            for col in range(N):
+                colors.append(color_first)
+                colors.append(color_second)
+            for col in range(N):
+                colors.append(color_second)
+                colors.append(color_first)
+        for i in range(N):
+            color = color_first if i % 2 == 0 else color_second
             colors.append(color)
-            color = color_second if color == color_first else color_first
+
     return colors
 
 
@@ -414,12 +428,16 @@ def alternation(N: int, pattern_type: str, color_first: str, color_second: str) 
     colors = []
 
     if pattern_type == f'{lcl.ROW_BY_ROW}':
-        for i in range(N):
+        for row in range(N):
+            color = color_first if row % 2 == 0 else color_second
             for _ in range(N):
-                colors.append(color_first if i % 2 == 0 else color_second)
+                colors.append(color)
     else:
-        for col in range(N ** 2):
-            colors.append(color_first if col % 2 == 0 else color_second)
+        for row in range(N):
+            for col in range(N):
+                color = color_first if col % 2 == 0 else color_second
+                colors.append(color)
+
     return colors
 
 
@@ -452,10 +470,10 @@ def chose_type_check() -> str:
 
     types = [f'{lcl.ROW_BY_ROW}', f'{lcl.COLUMN_WISE}']
 
-    print(f'{lcl.FILL_OPTIONS}')
+    print(f'{lcl.FILL_OPTIONS_COLUMNS}')  # Используем правильную константу
 
     while True:
-        pattern_type = input(f'{lcl.CHOOSE_FILL_OPTION}').strip().lower()
+        pattern_type = input(f'{lcl.CHOOSE_FILL_OPTION_COLUMNS}').strip().lower()
         if pattern_type in types:
             return pattern_type
         print(f'{lcl.INPUT_ERROR}')
@@ -551,3 +569,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
